@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102a56">
+<title>FB Pro Growth v2 — Dashboard</title>
+<style>
+:root{--navy:#102a56;--blue:#1769e0;--cyan:#31b7d5;--bg:#f3f6fb;--ink:#17243b;--muted:#69778d;--line:#e2e8f1;--white:#fff;--orange:#ff9f43;--green:#138a60}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(120deg,#102a56,#1769e0);color:#fff;padding:18px max(18px,calc((100% - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:13px;background:#fff;color:var(--blue);display:grid;place-items:center;font-weight:900;font-size:21px}.brand h1{font-size:18px;margin:0}.brand p{font-size:12px;margin:2px 0 0;color:#d9e8ff}.header-note{font-size:12px;color:#e1ecff}
+.wrap{max-width:1180px;margin:auto;padding:22px 16px 40px}.welcome{display:flex;justify-content:space-between;gap:14px;align-items:end;flex-wrap:wrap;margin-bottom:18px}.welcome h2{margin:0;font-size:25px;letter-spacing:-.5px}.welcome p{margin:5px 0 0;color:var(--muted)}.period{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;color:var(--ink)}
+.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 14px;margin-bottom:12px}.tab{white-space:nowrap;border:1px solid var(--line);background:#fff;color:#34435b;padding:10px 14px;border-radius:10px;font-weight:650;cursor:pointer}.tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.panel{display:none}.panel.active{display:block}.grid{display:grid;gap:14px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 3px 14px #172b4d08}.metric-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}.metric-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#eaf2ff;color:var(--blue);font-size:17px}.metric-value{font-size:28px;font-weight:800;margin:11px 0 2px;letter-spacing:-.7px}.metric-foot{font-size:12px;color:var(--green)}.two{grid-template-columns:1.15fr .85fr}.section-title{font-size:17px;margin:0 0 5px}.sub{font-size:13px;color:var(--muted);margin:0 0 15px}.barlist{display:grid;gap:14px}.barrow{display:grid;grid-template-columns:110px 1fr 48px;gap:10px;align-items:center;font-size:13px}.track{height:9px;background:#edf1f7;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px}.pill{font-size:11px;border-radius:99px;background:#e9f8f1;color:var(--green);padding:5px 8px;font-weight:700}.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px}.quick button{padding:13px 10px;border:1px solid var(--line);border-radius:12px;background:#f8faff;text-align:left;font-weight:700;color:var(--ink);cursor:pointer}.quick button span{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:4px}
+label{display:block;font-size:13px;font-weight:700;margin:0 0 6px}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #d8e0ec;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}textarea{resize:vertical;min-height:92px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin-bottom:13px}.btn{border:0;border-radius:10px;background:var(--blue);color:#fff;padding:11px 15px;font-weight:750;cursor:pointer}.btn.secondary{background:#eaf1ff;color:var(--blue);border:1px solid #d5e3ff}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.actions{display:flex;gap:8px;flex-wrap:wrap}.output{white-space:pre-wrap;background:#f7f9fd;border:1px dashed #cad6e7;border-radius:12px;padding:14px;min-height:100px;margin-top:14px}.hint{font-size:12px;color:var(--muted);margin-top:7px}.calendar-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.dayname{text-align:center;font-size:11px;color:var(--muted);font-weight:800;padding:8px 0}.day{min-height:86px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px;font-size:12px;cursor:pointer;overflow:hidden}.day.other{opacity:.4}.day.today{border:2px solid var(--blue)}.daynum{font-weight:800}.event{display:block;background:#eaf2ff;color:#1455b5;border-radius:5px;padding:3px 4px;margin-top:5px;font-size:10px;overflow-wrap:anywhere}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:700;background:#fafbfd}.empty{text-align:center;padding:28px;color:var(--muted)}.notice{padding:12px 14px;border-radius:12px;background:#fff7e9;border:1px solid #ffe0ad;color:#79501b;font-size:13px;margin-bottom:14px}.chart{height:180px;display:flex;align-items:end;gap:8px;padding:15px 2px 0;border-bottom:1px solid var(--line)}.chart-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:end;height:100%;gap:7px;font-size:11px;color:var(--muted)}.chart-bar{width:min(30px,75%);background:linear-gradient(180deg,var(--cyan),var(--blue));border-radius:6px 6px 2px 2px;min-height:4px}.footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 0 0}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.welcome h2{font-size:22px}.wrap{padding:17px 12px 30px}.card{padding:14px}.metric-value{font-size:25px}.formgrid{grid-template-columns:1fr}.day{min-height:65px;padding:5px}.event{font-size:9px}.barrow{grid-template-columns:88px 1fr 38px}.quick{grid-template-columns:1fr 1fr}}
+@media(max-width:390px){.metrics{gap:9px}.metric-value{font-size:22px}.metric-top{font-size:11px}.day{min-height:57px}.dayname{font-size:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">FB</div><div><h1>FB Pro Growth</h1><p>Asisten pertumbuhan audiens autentik • v2</p></div></div>
+  <div class="header-note">Ruang kerja kreator • Prototipe pribadi</div>
+</header>
+<main class="wrap">
+  <div class="welcome"><div><h2>Dashboard pertumbuhan</h2><p>Rencanakan konten, catat hasil, dan pelajari apa yang disukai audiens.</p></div><div><span class="pill">● Mode lokal aktif</span></div></div>
+  <div class="notice"><b>Catatan prototipe:</b> data disimpan di browser perangkat ini. Belum terhubung ke Facebook atau Meta API. Masukkan metrik secara manual; jangan masukkan kata sandi Facebook.</div>
+  <nav class="tabs" aria-label="Menu">
+    <button class="tab active" data-tab="dashboard">Ringkasan</button><button class="tab" data-tab="generator">Generator konten</button><button class="tab" data-tab="calendar">Kalender posting</button><button class="tab" data-tab="analytics">Analitik</button>
+  </nav>
+  <section class="panel active" id="dashboard">
+    <div class="grid metrics">
+      <div class="card"><div class="metric-top">Followers saat ini <span class="metric-icon">♙</span></div><div class="metric-value" id="mFollowers">0</div><div class="metric-foot">Catatan manual terbaru</div></div>
+      <div class="card"><div class="metric-top">Pengikut baru <span class="metric-icon">↗</span></div><div class="metric-value" id="mGrowth">0</div><div class="metric-foot">Dalam periode catatan</div></div>
+      <div class="card"><div class="metric-top">Konten dicatat <span class="metric-icon">▤</span></div><div class="metric-value" id="mPosts">0</div><div class="metric-foot">Di kalender konten</div></div>
+      <div class="card"><div class="metric-top">Rata-rata interaksi <span class="metric-icon">♡</span></div><div class="metric-value" id="mEngage">0%</div><div class="metric-foot">Dari data analitik yang diisi</div></div>
+    </div>
+    <div class="grid two">
+      <div class="card"><h3 class="section-title">Prioritas minggu ini</h3><p class="sub">Rutinitas sederhana untuk membangun audiens nyata.</p><div class="barlist">
+        <div class="barrow"><span>Reels edukasi</span><div class="track"><div class="fill" style="width:85%"></div></div><b>3x</b></div>
+        <div class="barrow"><span>Kuis / game</span><div class="track"><div class="fill" style="width:60%"></div></div><b>2x</b></div>
+        <div class="barrow"><span>Balas komentar</span><div class="track"><div class="fill" style="width:100%"></div></div><b>Harian</b></div>
+        <div class="barrow"><span>Evaluasi hasil</span><div class="track"><div class="fill" style="width:35%"></div></div><b>1x</b></div>
+      </div></div>
+      <div class="card"><h3 class="section-title">Aksi cepat</h3><p class="sub">Mulai dari satu langkah kecil.</p><div class="quick">
+        <button onclick="showTab('generator')">✦ Buat ide konten<span>Hook, caption, CTA</span></button>
+        <button onclick="showTab('calendar')">▦ Rencanakan posting<span>Tambah jadwal</span></button>
+        <button onclick="showTab('analytics')">↗ Catat hasil<span>Views dan interaksi</span></button>
+        <button onclick="exportData()">⇩ Cadangkan data<span>Unduh file JSON</span></button>
+      </div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3 class="section-title">Konten berikutnya</h3><p class="sub">Jadwal yang akan datang</p><div id="upcoming" class="empty">Belum ada jadwal. Tambahkan konten melalui Kalender posting.</div></div>
+  </section>
+  <section class="panel" id="generator">
+    <div class="grid two">
+      <div class="card"><h3 class="section-title">Generator ide konten</h3><p class="sub">Template siap edit untuk niche edukasi otomotif.</p>
+        <div class="field"><label for="topic">Topik utama</label><input id="topic" value="3 kesalahan saat merawat CVT motor matik" placeholder="Contoh: pemeriksaan busi"></div>
+        <div class="formgrid"><div class="field"><label for="format">Format konten</label><select id="format"><option>Reels 30 detik</option><option>Poster edukasi</option><option>Kuis interaktif</option><option>Game tebak kesalahan</option><option>Carousel edukasi</option></select></div><div class="field"><label for="tone">Gaya penyampaian</label><select id="tone"><option>Edukatif dan praktis</option><option>Mitos vs fakta</option><option>Humor ringan</option><option>Cerita / storytelling</option><option>Menantang dan interaktif</option></select></div></div>
+        <div class="field"><label for="audience">Audiens sasaran</label><select id="audience"><option>Pengendara motor harian</option><option>Siswa otomotif</option><option>Mekanik pemula</option><option>Guru dan komunitas otomotif</option></select></div>
+        <div class="actions"><button class="btn" onclick="generateContent()">Buat konsep</button><button class="btn secondary" onclick="randomTopic()">Acak topik</button></div>
+      </div>
+      <div class="card"><h3 class="section-title">Hasil konsep</h3><p class="sub">Edit lagi sebelum dipublikasikan. Hasil dibuat di perangkat, bukan dikirim otomatis.</p><div id="generated" class="output">Konsep konten akan muncul di sini.</div><div class="actions" style="margin-top:10px"><button class="btn" onclick="copyGenerated()">Salin teks</button><button class="btn secondary" onclick="scheduleGenerated()">Jadwalkan konsep</button></div><p class="hint">Tips: utamakan informasi akurat, visual orisinal, dan ajakan berdiskusi yang wajar. Tidak ada jaminan konten menjadi viral.</p></div>
+    </div>
+  </section>
+  <section class="panel" id="calendar">
+    <div class="card">
+      <div class="calendar-head"><div><h3 class="section-title">Kalender posting</h3><p class="sub" style="margin:4px 0 0">Pilih tanggal untuk menambahkan rencana konten.</p></div><div class="actions"><button class="btn ghost" onclick="shiftMonth(-1)">‹</button><b id="monthLabel"></b><button class="btn ghost" onclick="shiftMonth(1)">›</button></div></div>
+      <div id="calendarGrid" class="calendar"></div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+      <h3 class="section-title">Tambah rencana posting</h3>
+      <div class="formgrid"><div class="field"><label for="postDate">Tanggal</label><input type="date" id="postDate"></div><div class="field"><label for="postType">Jenis konten</label><select id="postType"><option>Reels edukasi</option><option>Kuis</option><option>Game</option><option>Poster edukasi</option><option>Storytelling</option><option>Live / diskusi</option></select></div></div>
+      <div class="field"><label for="postTitle">Judul / ide konten</label><input id="postTitle" placeholder="Contoh: Gejala V-belt CVT mulai aus"></div>
+      <div class="field"><label for="postNotes">Catatan (opsional)</label><textarea id="postNotes" placeholder="Hook, bahan visual, atau CTA..."></textarea></div>
+      <button class="btn" onclick="addPost()">Simpan jadwal</button>
+    </div>
+    <div class="card" style="margin-top:14px"><h3 class="section-title">Daftar rencana</h3><div id="postList" class="tablewrap"></div></div>
+  </section>
+  <section class="panel" id="analytics">
+    <div class="grid two">
+      <div class="card"><h3 class="section-title">Catat performa konten</h3><p class="sub">Masukkan angka dari Insights / Professional dashboard secara manual.</p>
+        <div class="field"><label for="aDate">Tanggal publikasi</label><input id="aDate" type="date"></div>
+        <div class="field"><label for="aTitle">Judul konten</label><input id="aTitle" placeholder="Nama konten"></div>
+        <div class="formgrid"><div class="field"><label for="aViews">Views / tayangan</label><input id="aViews" type="number" min="0" value="0"></div><div class="field"><label for="aReach">Jangkauan</label><input id="aReach" type="number" min="0" value="0"></div><div class="field"><label for="aLikes">Suka + reaksi</label><input id="aLikes" type="number" min="0" value="0"></div><div class="field"><label for="aComments">Komentar</label><input id="aComments" type="number" min="0" value="0"></div><div class="field"><label for="aShares">Dibagikan</label><input id="aShares" type="number" min="0" value="0"></div><div class="field"><label for="aFollows">Pengikut baru</label><input id="aFollows" type="number" min="0" value="0"></div></div>
+        <button class="btn" onclick="addAnalytics()">Simpan performa</button>
+      </div>
+      <div class="card"><h3 class="section-title">Tren tayangan</h3><p class="sub">Perbandingan dari catatan terakhir (maksimal 7 konten).</p><div id="chart" class="chart"></div><div id="chartCaption" class="hint">Tambahkan data performa untuk melihat grafik.</div><hr style="border:0;border-top:1px solid var(--line);margin:17px 0"><div class="barlist" id="insightStats"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3 class="section-title">Analisis mingguan & rekomendasi</h3><p class="sub">Rekomendasi dihitung dari catatan performa yang kamu masukkan, bukan data langsung dari Facebook.</p><div class="actions"><button class="btn" onclick="makeWeeklyInsights()">Analisis data saya</button></div><div id="weeklyInsights" class="output">Simpan minimal satu catatan performa, lalu tekan “Analisis data saya”.</div></div>
+    <div class="card" style="margin-top:14px"><h3 class="section-title">Riwayat analitik</h3><div id="analyticsList" class="tablewrap"></div></div>
+  </section>
+  <div class="footer">FB Pro Growth • Prototipe lokal • Data tidak dikirim ke server mana pun.</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const today=new Date(); let viewYear=today.getFullYear(),viewMonth=today.getMonth(),lastGenerated='';
+const read=(key,fallback=[])=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch(e){return fallback}};
+const save=(key,val)=>localStorage.setItem(key,JSON.stringify(val));
+let posts=read('fbpg_posts'), analytics=read('fbpg_analytics'), profile=read('fbpg_profile',{followers:0,baseline:0});
+function showTab(name){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===name));if(name==='calendar')renderCalendar();if(name==='analytics')renderAnalytics();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+function fmt(n){return Number(n||0).toLocaleString('id-ID')}
+function renderDashboard(){
+$('mPosts').textContent=posts.length;
+$('mFollowers').textContent=fmt(profile.followers);
+$('mGrowth').textContent=fmt(Math.max(0,profile.followers-profile.baseline));
+const sums=analytics.reduce((a,x)=>({eng:a.eng+x.likes+x.comments+x.shares,reach:a.reach+x.reach}),{eng:0,reach:0});
+$('mEngage').textContent=(sums.reach?Math.min(999,sums.eng/sums.reach*100):0).toFixed(1)+'%';
+const upcoming=posts.filter(p=>p.date>=isoDate(today)).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
+$('upcoming').innerHTML=upcoming.length?upcoming.map(p=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)"><div><b>${esc(p.title)}</b><div class="hint">${esc(p.type)} • ${p.date}</div></div><span class="pill">Terjadwal</span></div>`).join(''):'Belum ada jadwal. Tambahkan konten melalui Kalender posting.';
+}
+function isoDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function randomTopic(){const t=['Cara membaca kondisi busi motor','3 tanda V-belt CVT mulai aus','Mitos vs fakta memanaskan motor injeksi','Kesalahan mengukur tekanan ban','Kenapa motor brebet saat akselerasi','Pemeriksaan aki sebelum perjalanan'];$('topic').value=t[Math.floor(Math.random()*t.length)];generateContent()}
+function generateContent(){
+const topic=$('topic').value.trim()||'Tips perawatan motor';const format=$('format').value,tone=$('tone').value,aud=$('audience').value;
+let hook= tone==='Mitos vs fakta'?'MITOS ATAU FAKTA? ':tone==='Humor ringan'?'Pernah mengalami ini? ':tone==='Cerita / storytelling'?'Pernah ada kasus seperti ini di bengkel… ':tone==='Menantang dan interaktif'?'Coba jawab sebelum melihat pembahasan: ':'Jangan abaikan hal sederhana ini: ';
+let body=format==='Reels 30 detik'?`NASKAH REELS (±30 detik)\n0–3 dtk — HOOK: ${hook}${topic}.\n3–10 dtk — TUNJUKKAN gejala atau situasi yang sering ditemui.\n10–22 dtk — JELASKAN pemeriksaan yang tepat, langkah demi langkah. Jangan menebak; gunakan data dan spesifikasi pabrikan.\n22–27 dtk — RANGKUM satu tindakan yang aman dan praktis.\n27–30 dtk — CTA: “Simpan video ini dan bagikan pengalamanmu di komentar.”`:format==='Kuis interaktif'?`KONSEP KUIS\nJudul: ${topic.toUpperCase()}\nPembuka: ${hook}\nPertanyaan: “Menurut kamu, pemeriksaan pertama yang paling tepat apa?”\nPilihan: A, B, C, atau D (tentukan berdasarkan materi yang benar).\nPenutup: “Tulis pilihan dan alasanmu. Pembahasan menyusul.”\nCatatan: pastikan opsi dan kunci jawaban teknis sudah diverifikasi.`:format==='Game tebak kesalahan'?`KONSEP GAME\nJudul: TEMUKAN KESALAHAN: ${topic.toUpperCase()}\nVisual: tampilkan kondisi bengkel/komponen dengan beberapa detail yang perlu diperiksa.\nInstruksi: “Amati gambar selama 10 detik. Apa saja yang perlu diperbaiki?”\nCTA: “Tulis temuanmu di komentar tanpa melihat jawaban orang lain.”\nProduksi: jangan tampilkan kunci jawaban pada visual awal.`:format==='Poster edukasi'?`RANCANGAN POSTER\nHeadline: ${topic.toUpperCase()}\nSubheadline: “Kenali gejala, periksa dengan benar, hindari menebak.”\nIsi: 1) Gejala utama 2) Pemeriksaan 3) Tindakan yang tepat.\nVisual: komponen utama besar, latar bengkel bersih, anotasi singkat dan terbaca di HP.\nCTA: “Simpan sebagai panduan.”`:`RANCANGAN ${format.toUpperCase()}\nSlide 1: ${hook}${topic}.\nSlide 2: jelaskan gejala atau masalah yang umum.\nSlide 3: tampilkan pemeriksaan yang benar.\nSlide 4: simpulkan tindakan praktis.\nSlide 5: ajukan pertanyaan yang relevan untuk diskusi.`;
+lastGenerated=`${topic}\nFormat: ${format}\nAudiens: ${aud}\nGaya: ${tone}\n\n${body}\n\nCAPTION\n${topic} — pahami gejalanya, lakukan pemeriksaan dengan benar, dan gunakan data sebelum menyimpulkan.\n\nCTA\nApa pengalamanmu tentang topik ini? Ceritakan di komentar.\n\nHASHTAG\n#EdukasiOtomotif #TipsMotor #BelajarOtomotif #FacebookPro`; $('generated').textContent=lastGenerated;
+}
+function copyGenerated(){if(!lastGenerated){alert('Buat konsep terlebih dahulu.');return}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(lastGenerated).then(()=>alert('Konsep disalin.')).catch(()=>fallbackCopy())}else fallbackCopy()}
+function fallbackCopy(){const t=document.createElement('textarea');t.value=lastGenerated;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();alert('Konsep disalin.')}
+function scheduleGenerated(){if(!lastGenerated){alert('Buat konsep terlebih dahulu.');return}showTab('calendar');$('postTitle').value=$('topic').value.trim();$('postType').value=$('format').value==='Reels 30 detik'?'Reels edukasi':$('format').value==='Kuis interaktif'?'Kuis':$('format').value==='Game tebak kesalahan'?'Game':$('format').value==='Poster edukasi'?'Poster edukasi':'Reels edukasi';$('postNotes').value=lastGenerated.slice(0,1500);$('postDate').value=isoDate(new Date())}
+function addPost(){const date=$('postDate').value,title=$('postTitle').value.trim();if(!date||!title){alert('Isi tanggal dan judul konten.');return}posts.push({id:Date.now(),date,title,type:$('postType').value,notes:$('postNotes').value.trim()});posts.sort((a,b)=>a.date.localeCompare(b.date));save('fbpg_posts',posts);$('postTitle').value='';$('postNotes').value='';renderCalendar();renderDashboard();alert('Jadwal disimpan di perangkat ini.')}
+function shiftMonth(n){viewMonth+=n;if(viewMonth<0){viewMonth=11;viewYear--}if(viewMonth>11){viewMonth=0;viewYear++}renderCalendar()}
+function renderCalendar(){
+$('monthLabel').textContent=new Date(viewYear,viewMonth,1).toLocaleDateString('id-ID',{month:'long',year:'numeric'});
+const names=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];let out=names.map(n=>`<div class="dayname">${n}</div>`).join('');
+const first=new Date(viewYear,viewMonth,1),start=new Date(viewYear,viewMonth,1-first.getDay()),count=42;
+for(let i=0;i<count;i++){const d=new Date(start);d.setDate(start.getDate()+i);const date=isoDate(d),list=posts.filter(p=>p.date===date);out+=`<div class="day ${d.getMonth()!==viewMonth?'other':''} ${date===isoDate(today)?'today':''}" onclick="selectDate('${date}')"><div class="daynum">${d.getDate()}</div>${list.slice(0,2).map(p=>`<span class="event">${esc(p.title)}</span>`).join('')}${list.length>2?`<span class="hint">+${list.length-2} lagi</span>`:''}</div>`}
+$('calendarGrid').innerHTML=out;
+$('postDate').value=$('postDate').value||isoDate(today);
+$('postList').innerHTML=posts.length?`<table><thead><tr><th>Tanggal</th><th>Konten</th><th>Jenis</th><th>Aksi</th></tr></thead><tbody>${posts.map(p=>`<tr><td>${p.date}</td><td><b>${esc(p.title)}</b>${p.notes?`<div class="hint">${esc(p.notes.slice(0,100))}</div>`:''}</td><td>${esc(p.type)}</td><td><button class="btn ghost" onclick="deletePost(${p.id})">Hapus</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Belum ada rencana posting.</div>';
+}
+function selectDate(date){$('postDate').value=date;$('postTitle').focus()}
+function deletePost(id){if(confirm('Hapus jadwal ini?')){posts=posts.filter(p=>p.id!==id);save('fbpg_posts',posts);renderCalendar();renderDashboard()}}
+function addAnalytics(){
+const date=$('aDate').value,title=$('aTitle').value.trim();if(!date||!title){alert('Isi tanggal dan judul konten.');return}
+const entry={id:Date.now(),date,title,views:+$('aViews').value||0,reach:+$('aReach').value||0,likes:+$('aLikes').value||0,comments:+$('aComments').value||0,shares:+$('aShares').value||0,follows:+$('aFollows').value||0};
+analytics.push(entry);save('fbpg_analytics',analytics);
+if(profile.followers===0){profile.followers=entry.follows;profile.baseline=0}else profile.followers+=entry.follows;
+save('fbpg_profile',profile);$('aTitle').value='';['aViews','aReach','aLikes','aComments','aShares','aFollows'].forEach(id=>$(id).value=0);renderAnalytics();renderDashboard();alert('Performa disimpan. Pengikut baru dijumlahkan ke ringkasan lokal.');
+}
+function makeWeeklyInsights(){
+  const box=$('weeklyInsights');
+  if(!analytics.length){box.textContent='Belum ada data analitik. Tambahkan minimal satu catatan terlebih dahulu.';return}
+  const sorted=analytics.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  const total=sorted.reduce((s,a)=>({views:s.views+a.views,reach:s.reach+a.reach,eng:s.eng+a.likes+a.comments+a.shares,fol:s.fol+a.follows}),{views:0,reach:0,eng:0,fol:0});
+  const rate=total.reach?total.eng/total.reach*100:0;
+  const best=sorted.reduce((a,b)=>((b.views+b.likes+b.comments*3+b.shares*4+b.follows*5)>(a.views+a.likes+a.comments*3+a.shares*4+a.follows*5)?b:a),sorted[0]);
+  const last=sorted.slice(-3),prev=sorted.slice(-6,-3);
+  const avg=x=>x.length?x.reduce((s,a)=>s+a.views,0)/x.length:0;
+  const trend=prev.length?((avg(last)-avg(prev))/Math.max(1,avg(prev))*100):null;
+  const rec=[];
+  if(rate<2)rec.push('Interaksi relatif rendah pada data yang tersedia. Uji pertanyaan yang spesifik dan relevan di akhir konten; hindari engagement bait.');
+  else rec.push('Interaksi terlihat menjanjikan dari catatan yang tersedia. Pertahankan topik yang memicu diskusi bermakna dan balas komentar dengan konteks.');
+  if(total.fol===0)rec.push('Belum ada pengikut baru yang tercatat. Pastikan angka followers baru dicatat setelah publikasi dan gunakan ajakan mengikuti yang wajar.');
+  else rec.push('Tercatat '+fmt(total.fol)+' pengikut baru. Bandingkan format dan topik konten pada periode berikutnya untuk mencari pola.');
+  if(trend!==null)rec.push('Rata-rata views tiga catatan terakhir '+(trend>=0?'naik ':'turun ')+Math.abs(trend).toFixed(1)+'% dibanding tiga catatan sebelumnya. Sampel kecil; gunakan sebagai petunjuk, bukan kesimpulan.');
+  rec.push('Konten dengan skor gabungan tertinggi saat ini: “'+best.title+'” ('+fmt(best.views)+' views, '+fmt(best.follows)+' pengikut baru). Coba buat satu lanjutan yang memberi nilai baru, bukan sekadar mengulang.');
+  rec.push('Rencana uji 7 hari: 3 Reels edukasi, 1 kuis, 1 game visual, balas komentar secara rutin, lalu catat views, jangkauan, interaksi, dan pengikut baru dengan cara yang konsisten.');
+  box.textContent='RINGKASAN DATA\\n'+fmt(sorted.length)+' catatan • '+fmt(total.views)+' views • '+fmt(total.reach)+' jangkauan • '+rate.toFixed(1)+'% interaksi/jangkauan\\n\\nREKOMENDASI\\n• '+rec.join('\\n• ');
+}
+function deleteAnalytics(id){if(confirm('Hapus catatan ini?')){analytics=analytics.filter(a=>a.id!==id);save('fbpg_analytics',analytics);renderAnalytics();renderDashboard()}}
+function renderAnalytics(){
+const recent=analytics.slice(-7),max=Math.max(1,...recent.map(a=>a.views));
+$('chart').innerHTML=recent.length?recent.map(a=>`<div class="chart-col" title="${esc(a.title)}: ${fmt(a.views)} views"><div class="chart-bar" style="height:${Math.max(4,a.views/max*125)}px"></div><span>${esc(a.date.slice(5))}</span></div>`).join(''):'<div class="empty" style="width:100%">Belum ada data</div>';
+$('chartCaption').textContent=recent.length?`Total tayangan catatan terakhir: ${fmt(recent.reduce((s,a)=>s+a.views,0))}`:'Tambahkan data performa untuk melihat grafik.';
+const totals=analytics.reduce((s,a)=>({views:s.views+a.views,reach:s.reach+a.reach,eng:s.eng+a.likes+a.comments+a.shares,fol:s.fol+a.follows}),{views:0,reach:0,eng:0,fol:0});
+$('insightStats').innerHTML=`<div class="barrow"><span>Total tayangan</span><b>${fmt(totals.views)}</b></div><div class="barrow"><span>Total jangkauan</span><b>${fmt(totals.reach)}</b></div><div class="barrow"><span>Interaksi</span><b>${fmt(totals.eng)}</b></div><div class="barrow"><span>Pengikut baru</span><b>${fmt(totals.fol)}</b></div>`;
+$('analyticsList').innerHTML=analytics.length?`<table><thead><tr><th>Tanggal</th><th>Konten</th><th>Views</th><th>Reach</th><th>Interaksi</th><th>Followers baru</th><th>Aksi</th></tr></thead><tbody>${analytics.slice().reverse().map(a=>`<tr><td>${a.date}</td><td>${esc(a.title)}</td><td>${fmt(a.views)}</td><td>${fmt(a.reach)}</td><td>${fmt(a.likes+a.comments+a.shares)}</td><td>${fmt(a.follows)}</td><td><button class="btn ghost" onclick="deleteAnalytics(${a.id})">Hapus</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Belum ada catatan analitik.</div>';
+}
+function exportData(){const data={exportedAt:new Date().toISOString(),posts,analytics,profile};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='fb-pro-growth-backup.json';a.click();URL.revokeObjectURL(url)}
+$('aDate').value=isoDate(today);$('postDate').value=isoDate(today);
+renderDashboard();renderCalendar();renderAnalytics();
+</script>
+</body>
+</html>
